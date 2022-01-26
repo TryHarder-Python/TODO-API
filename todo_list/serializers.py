@@ -51,7 +51,7 @@ class TaskUpdateCreateSerializer(serializers.ModelSerializer):
         # Когда создается таска отправляется эмеил в консоль
         task_obj = super().create(validated_data)
         send_mail(
-            'Invitation',
+            f'{task_obj.title} for you',
             'This Task for you',
             'exampleemail@gmail.com',
             [user.email for user in task_obj.for_who.all()]
