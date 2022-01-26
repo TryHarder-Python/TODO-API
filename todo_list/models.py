@@ -19,8 +19,24 @@ class Task(models.Model):
                                     related_name='task_image',
                                     blank=True)
 
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name_plural = 'Задачи'
+        verbose_name = 'Задача'
+
 
 class Image(models.Model):
+    """Изображения"""
     image = models.ImageField(upload_to='task_image/')
     create_at = models.DateTimeField('Загруженно', auto_now_add=True)
+
+    def __str__(self):
+        return str(self.image)
+
+    class Meta:
+        verbose_name_plural = 'Изображения'
+        verbose_name = 'Изображение'
+
 
