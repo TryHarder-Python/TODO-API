@@ -1,3 +1,4 @@
+from django.core.mail import send_mail
 from rest_framework import serializers
 
 from .models import Task, Image
@@ -45,3 +46,15 @@ class TaskUpdateCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         exclude = ('author', )
+
+    def create(self, validated_data):
+        # Когда создается таска отправляется эмеил в консоль
+        task_obj = super().create(validated_data)
+        send_mail(
+            'Invitation',
+            'This Task for you',
+            'exampleemail@gmail.com',
+            [user.email for user in task_obj.for_who.all()]
+        )
+        print([i.email for i in task_obj.for_who.all()])
+        return task_obj

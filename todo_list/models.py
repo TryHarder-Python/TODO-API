@@ -1,5 +1,4 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import User
 
 from django.db import models
 
@@ -40,5 +39,7 @@ class Image(models.Model):
     class Meta:
         verbose_name_plural = 'Изображения'
         verbose_name = 'Изображение'
+
+
 
 
